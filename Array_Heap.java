@@ -68,9 +68,18 @@ public class Array_Heap {
 			System.out.println("The heap is Sorted");
 		}
 		else {
-			if((arr[2*i+1].key1).compareTo(arr[2*i+2].key1)) {
-				System.out.println("mom");
+			if(arr[2*i+1].compareTo(arr[2*i+2])==1 && arr[i].compareTo(arr[2*i+2])==1) {
+				arr[i].Swap(arr[i],arr[2*i+2]);
+				bottomDown(2*i+2);
 			}
+			else if(arr[2*i+1].compareTo(arr[2*i+2])==-1 &&arr[i].compareTo(arr[2*i+1])==1) {
+				arr[i].Swap(arr[i], arr[2*i+1]);
+				bottomDown(2*i+1);
+			}
+			else {
+				System.out.println("Sorted");
+			}
+				
 		}
 	}
 
@@ -83,7 +92,16 @@ public class Array_Heap {
 			return false;
 		}
 	}
+	
+
 	public static void main(String[] args) {
+		Entry[]arr = new Entry<String,Integer,Integer>[10];
+		Array_Heap kok = new Array_Heap<String,Integer,Integer>(arr,10);
+		Entry e1 = new Entry <String,Integer,Integer>();
+		e1.key1=2;
+		e1.key2=2;
+		e1.value="poato";
+		kok.Insert(e1);
 		
 	}
 
