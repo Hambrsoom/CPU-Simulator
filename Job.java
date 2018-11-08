@@ -7,10 +7,33 @@ public class Job {
 	private int     jobCurrentLength;
 	private int     jobPriority;
 	private int     jobFinalPriority;
-	private long    EntryTime;
-	private long    EndTime;
+	private long    entryTime;
+	private long    endTime;
+	private long    waitTime;
 	
-//Setters and Getters:
+//Constructors:
+	public Job() {
+		jobName         =null;
+		jobLength       =0;
+		jobCurrentLength=0;
+		jobPriority     =0;
+        jobFinalPriority=0;
+		entryTime       =0;
+		endTime         =0;
+		waitTime        =0;
+	}
+	public Job(String jobName, int jobLength, int jobCurrentLength,int jobPriority, int jobFinalPriority, int entryTime, int endTime, int waitTime) {
+		this.jobName         =jobName;
+		this.jobLength       =jobLength;
+		this.jobCurrentLength=jobCurrentLength;
+		this.jobPriority     =jobPriority;
+        this.jobFinalPriority=jobFinalPriority;
+		this.entryTime       =entryTime;
+		this.endTime         =endTime;
+		this.waitTime        =waitTime;
+	}
+
+	//Setters and Getters:
 	public String getJobName() {
 		return jobName;
 	}
@@ -52,19 +75,22 @@ public class Job {
 	}
 
 	public long getEntryTime() {
-		return EntryTime;
+		return entryTime;
 	}
 
 	public void setEntryTime(long entryTime) {
-		EntryTime = entryTime;
+		entryTime = entryTime;
 	}
 
 	public long getEndTime() {
-		return EndTime;
+		return endTime;
 	}
 
 	public void setEndTime(long endTime) {
-		EndTime = endTime;
+		endTime = endTime;
+	}
+	public String toString() {
+		return jobName+ "-"+ jobFinalPriority;
 	}
 	
 //main method:

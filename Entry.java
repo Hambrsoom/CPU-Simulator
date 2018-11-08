@@ -13,6 +13,9 @@ public class Entry <s,k1 extends Comparable <k1>,k2 extends Comparable <k2>> imp
 			this.key1  = key1;
 			this.key2  = key2;
 		}
+		public String toString() {
+			return value.toString();
+		}
 
 //Getters and Setters
 		public s getValue() {

@@ -8,9 +8,14 @@ public class Array_Heap {
 	
 //Constructors
 	public Array_Heap() {
-		arr         = (Entry[]) new Object[size];
+		arr         = new Entry[size];
 		size        = 0;
  		rightMost   = -1;
+	}
+	public Array_Heap(int size) {
+		this.size        = size;
+ 		rightMost   	 = -1;
+ 		arr              = new Entry[size];
 	}
 	public Array_Heap(Entry[]arr,int size) {
 		this.rightMost   = -1;
@@ -104,7 +109,7 @@ public class Array_Heap {
 		String line = "";
 		for (int i =0;i<arr.length;i++) {
 			if(arr[i]!=null) {
-				line += arr[i].value+ " ";
+				line += arr[i].toString()+ " ";
 			}
 		}
 		return line;
