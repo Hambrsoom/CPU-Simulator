@@ -42,41 +42,37 @@ public class Array_Heap {
 		else 
 			rightMost = rightMost+1;
 			arr[rightMost] = newNode;
-			
+		 this.upHeap(rightMost);
 //dont forget to sort it Up-Heap
 	}
-	public void upHeap(int k) {
-		while (k != 1) {
-			if (heap[k / 2].getJobPriority() > heap[k].getJobPriority()) {
-				swap(k, k / 2);
-			}
-			k = k - 1;
-		}
-	}
 	public void upHeap(int i) {
-		if(arr[i/2].compareTo(arr[])==1 && arr[i].compareTo(arr[2*i+2])==1)
+			while(i>0) {
+					if(arr[(i-1)/2].compareTo(arr[i])==1) {
+						arr[i].Swap(arr[(i-1)/2],arr[i]);
+					}
+					i = (i-1)/2;
+			}
 	}
-	
 //Sorting the heap (putting the min on the top)
 	
-	public void removeMin() {
+	public Entry removeMin() {
 		if(this.isEmpty()) {
 			System.out.println("The heap is empty");
-		}
-		else if (rightMost >= this.getSize()-1) {
-			System.out.println("The heap is full");
+			return null;
 		}
 		else {
-			arr[0]         = null;
-			arr[0]         = arr[rightMost];
-			arr[rightMost] = null;
+			Entry temp = new Entry(arr[0].value,arr[0].key1,arr[0].key2);
+			arr[0].Swap(arr[0],arr[rightMost]);
+			arr[rightMost]=null;
 			rightMost      = rightMost-1;
+			this.bottomDown(0);
+			return temp;
 		}
 	}
 	
 //Bottom-down the heap after executing removeMin():
 	public void bottomDown(int i) {
-		if(i >= (getSize()-1)/2) {
+		if(i >= (rightMost-1)/2) {
 			System.out.println("The heap is Sorted");
 		}
 		else {
@@ -118,21 +114,16 @@ public class Array_Heap {
 	public static void main(String[] args) {
 		Entry[]arr = new Entry[10];
 		Array_Heap kok = new Array_Heap(arr,10);
-		Entry e1 = new Entry <String,Integer,Integer>();
-		e1.key1=2;
-		e1.key2=2;
-		e1.value="poato";
-		Entry e2 = new Entry <String,Integer,Integer>("mo",3,4);
-		kok.Insert(e1);
+		Entry e2 = new Entry <String,Integer,Integer>("a",10,4);
 		kok.Insert(e2);
-		Entry e3 = new Entry <String,Integer,Integer>("mo",10,4);
-		Entry e4 = new Entry <String,Integer,Integer>("me",3,9);
-		Entry e5 = new Entry <String,Integer,Integer>("uou",2,3);
-		Entry e6 = new Entry <String,Integer,Integer>("karen",1,2);
-		Entry e7 = new Entry <String,Integer,Integer>("sad",12,4);
-		Entry e8 = new Entry <String,Integer,Integer>("koko",5,122);
-		Entry e9 = new Entry <String,Integer,Integer>("haoh",5,4);
-		Entry e10 = new Entry <String,Integer,Integer>("asddasd",5,3);
+		Entry e3 = new Entry <String,Integer,Integer>("b",9,4);
+		Entry e4 = new Entry <String,Integer,Integer>("c",8,9);
+		Entry e5 = new Entry <String,Integer,Integer>("d",7,3);
+		Entry e6 = new Entry <String,Integer,Integer>("e",6,2);
+		Entry e7 = new Entry <String,Integer,Integer>("f",5,4);
+		Entry e8 = new Entry <String,Integer,Integer>("g",7,122);
+		Entry e9 = new Entry <String,Integer,Integer>("h",2,4);
+		
 		kok.Insert(e3);
 		kok.Insert(e4);
 		kok.Insert(e5);
@@ -141,7 +132,16 @@ public class Array_Heap {
 		kok.Insert(e8);
 		kok.Insert(e9);
 		
+		
 		System.out.println("f: " + kok.isEmpty());
-		System.out.println("toString: "+ kok.toString());	}
+		System.out.println("toString: "+ kok.toString());	
+		kok.removeMin();
+		kok.removeMin();
+		Entry e10 = new Entry <String,Integer,Integer>("i",1,3);
+		kok.Insert(e10);
+		System.out.println("toString: "+ kok.toString());	
+		
+		
+	}
 
 }
