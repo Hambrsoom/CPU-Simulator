@@ -46,6 +46,7 @@ public class Entry <s,k1 extends Comparable <k1>,k2 extends Comparable <k2>> imp
 				return this.key1.compareTo(o.key1);
 			}
 		}
+		
 //Swapping method:
 		public void Swap(Entry e1, Entry e2) {
 			Entry  temp = new Entry <s,k1,k2>();

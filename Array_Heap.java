@@ -78,7 +78,6 @@ public class Array_Heap {
 //Bottom-down the heap after executing removeMin():
 	public void bottomDown(int i) {
 		if(i >= (rightMost-1)/2) {
-			System.out.println("The heap is Sorted");
 		}
 		else {
 			if(arr[2*i+1].compareTo(arr[2*i+2])==1 && arr[i].compareTo(arr[2*i+2])==1) {
@@ -96,6 +95,24 @@ public class Array_Heap {
 		}
 	}
 
+	public void sort(int i) {
+		if(i >= (rightMost-1)/2) {
+		}
+		else {
+			if(arr[2*i+1].compareTo(arr[2*i+2])==1 && arr[i].compareTo(arr[2*i+2])==1) {
+				arr[i].Swap(arr[i],arr[2*i+2]);
+				sort(0);
+			}
+			if(arr[2*i+1].compareTo(arr[2*i+2])==-1 &&arr[i].compareTo(arr[2*i+1])==1) {
+				arr[i].Swap(arr[i], arr[2*i+1]);
+				bottomDown(0);
+			}
+			else {
+				sort(i+1);
+			}
+				
+		}
+	}
 //will verify if the heap is empty
 	public boolean isEmpty() {
 		if(arr[0]==null) {
@@ -114,6 +131,7 @@ public class Array_Heap {
 		}
 		return line;
 	}
+
 	
 
 	public static void main(String[] args) {

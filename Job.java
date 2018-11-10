@@ -2,14 +2,15 @@
 public class Job {
 	
 //Attributes:
-	private String  jobName;
-	private int     jobLength;
-	private int     jobCurrentLength;
-	private int     jobPriority;
-	private int     jobFinalPriority;
-	private long    entryTime;
-	private long    endTime;
-	private long    waitTime;
+	public String  jobName;
+	public int     jobLength;
+	public int     jobCurrentLength;
+	public int     jobPriority;
+	public int     jobFinalPriority;
+	public long    entryTime;
+	public long    endTime;
+	public long    waitTime;
+	public long    age;
 	
 //Constructors:
 	public Job() {
@@ -21,8 +22,9 @@ public class Job {
 		entryTime       =0;
 		endTime         =0;
 		waitTime        =0;
+		age             =0;
 	}
-	public Job(String jobName, int jobLength, int jobCurrentLength,int jobPriority, int jobFinalPriority, int entryTime, int endTime, int waitTime) {
+	public Job(String jobName, int jobLength, int jobCurrentLength,int jobPriority, int jobFinalPriority, long entryTime, long endTime, long waitTime,long age) {
 		this.jobName         =jobName;
 		this.jobLength       =jobLength;
 		this.jobCurrentLength=jobCurrentLength;
@@ -31,6 +33,7 @@ public class Job {
 		this.entryTime       =entryTime;
 		this.endTime         =endTime;
 		this.waitTime        =waitTime;
+		this.age             =age;
 	}
 
 	//Setters and Getters:
@@ -89,9 +92,24 @@ public class Job {
 	public void setEndTime(long endTime) {
 		endTime = endTime;
 	}
-	public String toString() {
-		return jobName+ "-"+ jobFinalPriority;
+	
+	
+	public long getWaitTime() {
+		return waitTime;
 	}
+	public void setWaitTime(long waitTime) {
+		this.waitTime = waitTime;
+	}
+	public long getAge() {
+		return age;
+	}
+	public void setAge(long age) {
+		this.age = age;
+	}
+	public String toString() {
+		return "("+jobName+ "-(initial: "+ jobPriority + " -(final:"+ jobFinalPriority +")";
+	}
+	
 	
 //main method:
 	public static void main(String[] args) {
