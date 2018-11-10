@@ -1,33 +1,23 @@
 public class UnsortedList{
-
-	private int front;
-	private int rear;
 	private int currentSize;
 	private int maxSize;
-	private Entry[] circularQueue;
+	public Entry[] unsortedList;
 
 	//Constructors
 	public UnsortedList(){
-		front = -1;
-		rear = -1;
+	
 		currentSize = 0;
 		maxSize = 0;
-		circularQueue =  new Entry[this.maxSize];
+		unsortedList =  new Entry[this.maxSize];
 	}
 
-	public UnsortedList(Entry[] circularQueue ,int maxSize){
-		front = -1;
-		rear = -1;
+	public UnsortedList(int maxSize){
 		currentSize = 0;
 		this.maxSize = maxSize;
-		this.circularQueue =  new Entry[this.maxSize];		
+		this.unsortedList =  new Entry[this.maxSize];		
 	}
 
 	//Get & Set
-    public int getFront() { return front; }
-    public void setFront(int front) {this.front = front;}
-    public int getRear() { return rear; }
-    public void setRear(int rear) {this.rear = rear; }
     public int getCurrentSize() {return currentSize;}
     public void setCurrentSize(int currentSize) {this.currentSize = currentSize; }
 	 public int getMaxSize() { return maxSize;}
@@ -43,75 +33,81 @@ public class UnsortedList{
 	}
 	
 	public void insert(Entry object){
-		if(size() == maxSize)
-			System.out.println("Cannot enqueue  since the Queue is full!");			
+		if(size() == maxSize) {
+			System.out.println("Cannot insert  since the array is full!");	
+		}
 		else{	
-			rear = (rear + 1) % maxSize;
-			circularQueue[rear] = object;
-			currentSize++;
-			if(front == -1)
-				front = rear;
+			unsortedList[currentSize] = object;
+			currentSize               = currentSize +1;
 		}
 	}
 
-	public void removeMin(){
-		if(isEmpty())
-			System.out.println("Cannot dequeue since the Queue is empty!");			
-		else{
-			circularQueue[front] = null;
-			front = (front + 1) % maxSize;
-			currentSize--;
+	
+	public Entry removeMin() {
+		if(isEmpty()) {
+			System.out.println("Cannot remove since the array is empty!");	
+			return null;
+		}
+		else {
+			int index = searchMin();
+			Entry temp = unsortedList[index];
+			unsortedList[index] = null;
+			for (int i=index; i<size();i++) {
+				if(i+1 < size()) {
+					unsortedList[i]= unsortedList[i+1];	
+				}
+			}
+			currentSize = currentSize-1;
+			return temp;
 		}
 		
 	}
 
 	public String toString() {
-		String line = "[";
-		for (int i =front;i<maxSize;i++) {
-			if(circularQueue[i] == null)
-				line = line + "null ";
-			else
-				line += circularQueue[i].getValue() + " ";
-	
+		String line ="";
+		for (int i =0;i<size();i++) {
+			if(unsortedList[i]!=null) {
+				line += unsortedList[i].toString()+ " ";
+			}
 		}
-		return line+"]";
+		return line;
 	}
 	public int searchMin () {
 		int minimumElementPosition =0;
-		for (int i=0; i<maxSize; i++) {
-			if((i+1)<= maxSize) {
-			if(circularQueue[i]!=null && (circularQueue[i].compareTo(circularQueue[i+1])==1)) {
-				minimumElementPosition = i;
-			}
-			}
+		int j=0;
+		for (int i=0; i<size(); i++) {
+					if((unsortedList[minimumElementPosition].compareTo(unsortedList[i]))==1) {
+						minimumElementPosition =i;
+					}		
+					
 		}
 		return minimumElementPosition;
 	}
 
 	public static void main(String[] args){
 		Entry[] arr = new Entry[7];
-		UnsortedList queue =  new UnsortedList(arr, 7);
+		UnsortedList queue =  new UnsortedList(7);
 		Entry e1 = new Entry <String,Integer,Integer>("key7key4",7,4);
 		Entry e2 = new Entry <String,Integer,Integer>("key5",5,9);
 		Entry e3 = new Entry <String,Integer,Integer>("key9",9,122);
 		Entry e4 = new Entry <String,Integer,Integer>("key12",12,122);
 		Entry e5 = new Entry <String,Integer,Integer>("key1",1,122);
 		Entry e6 = new Entry <String,Integer,Integer>("key7key122",7,122);
-		Entry e7 = new Entry <String,Integer,Integer>("key2",2,122);
+		Entry e7 = new Entry <String,Integer,Integer>("key2",1,1);
+		
 		queue.insert(e1);
 		queue.insert(e2);
 		queue.insert(e3);	
 		queue.insert(e4);	
 		queue.insert(e5);	
 		queue.insert(e6);
-		queue.insert(e7);	
-		queue.removeMin();
+		queue.insert(e7);
+		System.out.println(queue.removeMin().toString());
 		queue.removeMin();
 		queue.removeMin();
 		queue.removeMin();
 		queue.insert(e5);
 		System.out.println(queue.toString());
-
 	}
 
 }
